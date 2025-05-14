@@ -251,6 +251,24 @@
     const modelSelect = document.getElementById('modelSelect');
     const sendBtn = document.getElementById('sendBtn');
 
+    // فحص تحميل مكتبة puter.js
+    function showPuterError(msg) {
+      const errorDiv = document.createElement('div');
+      errorDiv.style.background = '#ffbaba';
+      errorDiv.style.color = '#7c0000';
+      errorDiv.style.padding = '12px 18px';
+      errorDiv.style.borderRadius = '8px';
+      errorDiv.style.margin = '18px 32px 0 32px';
+      errorDiv.style.fontSize = '1.05rem';
+      errorDiv.style.textAlign = 'right';
+      errorDiv.style.border = '1px solid #ff8a8a';
+      errorDiv.style.boxShadow = '0 1px 6px rgba(0,0,0,0.04)';
+      errorDiv.innerHTML = '<b>خطأ:</b> ' + msg;
+      document.querySelector('.main').prepend(errorDiv);
+    }
+    if (typeof window.puter === 'undefined' || !window.puter.ai) {
+      showPuterError('لم يتم تحميل مكتبة Puter.js بشكل صحيح. تأكد من تشغيل الصفحة عبر خادم محلي (وليس مباشرة من المتصفح)، أو تحقق من اتصال الإنترنت.');
+    }
     function addMessage(text, sender = 'user', streaming = false) {
       const msgDiv = document.createElement('div');
       msgDiv.className = 'message ' + sender;
